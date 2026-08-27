@@ -1,0 +1,15 @@
+[book]
+title = "ICPC Algorithm Library"
+subtitle = "C++ 模板与知识点备忘"
+author = "Nalumi"
+date = ""
+source_dir = "chapters"
+template = "template/library.tex"
+output_name = "Library"
+columns = 2
+toc_depth = 3
+code_line_numbers = false
+
+[render]
+code_extensions = [".cpp", ".cc", ".cxx", ".hpp", ".hh", ".h"]
+

@@ -1,0 +1,20 @@
+# Library 使用的 TeX Live 包。install-packages.sh 会忽略空行和注释。
+ctex
+xecjk
+fandol
+listings
+tcolorbox
+titlesec
+enumitem
+fancyhdr
+lastpage
+tools
+booktabs
+bookmark
+hyperref
+geometry
+xcolor
+fontspec
+latexmk
+xetex
+
