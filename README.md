@@ -30,10 +30,10 @@ cd Library
 chapters/
 └── 01_Geometry/
     ├── _section.toml
-    ├── 01_点和向量.toml
-    ├── point_intro.md
-    ├── p2.cpp
-    └── point_examples.md
+    ├── 01_vector.toml
+    ├── vector_intro.md
+    ├── vector.cpp
+    └── vector_examples.md
 ```
 
 - 目录表示章节，必须包含 `_section.toml`。
@@ -58,11 +58,11 @@ title = "Geometry"
 普通 TOML 文件的 `title` 是标题的唯一来源，`files` 按数组顺序拼接同一标题下的内容：
 
 ```toml
-title = "点和向量"
+title = "vector"
 files = [
-  "point_intro.md",
-  "p2.cpp",
-  "point_examples.md",
+  "vector_intro.md",
+  "vector.cpp",
+  "vector_examples.md",
 ]
 ```
 
