@@ -16,12 +16,33 @@
 \usepackage{bookmark}
 \usepackage{url}
 
-\setmainfont{Maple Mono NF CN}
-\setsansfont{Maple Mono NF CN}
-\setmonofont{Maple Mono NF CN}
-\setCJKmainfont{Maple Mono NF CN}
-\setCJKsansfont{Maple Mono NF CN}
-\setCJKmonofont{Maple Mono NF CN}
+\setmainfont[
+  Path=../assets/fonts/MapleMono-NF-CN/,
+  UprightFont=MapleMono-NF-CN-Regular.ttf,
+  BoldFont=MapleMono-NF-CN-Bold.ttf,
+  ItalicFont=MapleMono-NF-CN-Regular.ttf,
+  BoldItalicFont=MapleMono-NF-CN-Bold.ttf
+]{MapleMono-NF-CN-Regular.ttf}
+\renewcommand{\sfdefault}{\rmdefault}
+\renewcommand{\ttdefault}{\rmdefault}
+\setCJKmainfont[
+  Path=../assets/fonts/MapleMono-NF-CN/,
+  BoldFont=MapleMono-NF-CN-Bold.ttf,
+  ItalicFont=MapleMono-NF-CN-Regular.ttf,
+  BoldItalicFont=MapleMono-NF-CN-Bold.ttf
+]{MapleMono-NF-CN-Regular.ttf}
+\setCJKsansfont[
+  Path=../assets/fonts/MapleMono-NF-CN/,
+  BoldFont=MapleMono-NF-CN-Bold.ttf,
+  ItalicFont=MapleMono-NF-CN-Regular.ttf,
+  BoldItalicFont=MapleMono-NF-CN-Bold.ttf
+]{MapleMono-NF-CN-Regular.ttf}
+\setCJKmonofont[
+  Path=../assets/fonts/MapleMono-NF-CN/,
+  BoldFont=MapleMono-NF-CN-Bold.ttf,
+  ItalicFont=MapleMono-NF-CN-Regular.ttf,
+  BoldItalicFont=MapleMono-NF-CN-Bold.ttf
+]{MapleMono-NF-CN-Regular.ttf}
 
 \geometry{
   a4paper,

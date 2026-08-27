@@ -20,7 +20,7 @@ cd Library
 ./install-packages.sh    # 按 tex-packages.txt 补齐 TinyTeX 宏包
 ```
 
-依赖：Python 3.11+、Pandoc、TinyTeX、XeLaTeX、latexmk 和 `Maple Mono NF CN` 字体。
+依赖：Python 3.11+、Pandoc、TinyTeX、XeLaTeX 和 latexmk。
 
 ## 内容目录约定
 
@@ -80,6 +80,7 @@ Markdown 文件只写正文，不再使用 front matter；标题和排版字段�
 
 - 默认 A4 横向双栏、紧凑页边距、自动目录和页眉页脚；正文先排满左栏，再从右栏顶部继续向下排列。
 - 中英文正文、标题和代码统一使用 `Maple Mono NF CN` 字体。
+- 字体文件位于 `assets/fonts/MapleMono-NF-CN/`，构建时直接按相对路径加载，无需安装系统字体。
 - C++ 和 Shell 使用 `listings`，支持语法高亮、中文注释、折行和可选行号。
 - Markdown 由 Pandoc 转换；宽表格请设置 `wide = true`，因为 `longtable` 不能直接放在双栏中。
 - `book.toml` 控制书名、作者、列数、代码行号和输出文件名。
