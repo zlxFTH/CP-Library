@@ -1,15 +1,9 @@
 pai() {
   mk a && mk bf && mk gen || return
-  cnt=0
   while true; do
     ./gen > 1.in
-    ./bf < 1.in > bf.out
-    ./a < 1.in > a.out
-    if diff -Zq a.out bf.out; then
-      echo "$((++cnt)) AC"
-    else
-      echo WA
-      break
-    fi
+    ./bf < 1.in > ans
+    ./a < 1.in > out
+    if diff -Zq out ans; then echo ac; else echo wa; break; fi
   done
 }
