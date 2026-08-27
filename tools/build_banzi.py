@@ -348,7 +348,6 @@ def graphic_paths(settings: Settings) -> str:
 
 def render_main_tex(settings: Settings) -> str:
     template = settings.template.read_text(encoding="utf-8")
-    date = latex_escape(settings.date) if settings.date else r"\today"
     subtitle_block = ""
     if settings.subtitle:
         subtitle_block = "\n".join(
@@ -359,11 +358,21 @@ def render_main_tex(settings: Settings) -> str:
                 + r"\par}",
             )
         )
+    date_block = ""
+    if settings.date:
+        date_block = "\n".join(
+            (
+                r"  \vspace{0.6em}",
+                r"  {\normalsize\color{LibraryGray}"
+                + latex_escape(settings.date)
+                + r"\par}",
+            )
+        )
     replacements = {
         "@@TITLE@@": latex_escape(settings.title),
         "@@SUBTITLE_BLOCK@@": subtitle_block,
         "@@AUTHOR@@": latex_escape(settings.author),
-        "@@DATE@@": date,
+        "@@DATE_BLOCK@@": date_block,
         "@@TOC_DEPTH@@": str(settings.toc_depth),
         "@@CODE_NUMBERS@@": "left" if settings.code_line_numbers else "none",
         "@@COLUMN_START@@": r"\twocolumn" if settings.columns == 2 else "",

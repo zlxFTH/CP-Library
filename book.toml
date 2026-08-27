@@ -1,7 +1,7 @@
 [book]
 title = "ICPC Algorithm Library"
 subtitle = ""
-author = "Nalumi"
+author = "队仨"
 date = ""
 source_dir = "chapters"
 template = "template/library.tex"
