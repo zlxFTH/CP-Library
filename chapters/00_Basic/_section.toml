@@ -2,12 +2,12 @@ title = "Basic"
 
 [[entries]]
 title = "test"
-files = ["00_test.sh"]
+files = ["test.sh"]
 
 [[entries]]
 title = "pai"
-files = ["01_pai.sh"]
+files = ["pai.sh"]
 
 [[entries]]
 title = "run"
-files = ["02_run.sh"]
+files = ["run.sh"]

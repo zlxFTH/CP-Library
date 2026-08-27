@@ -2,8 +2,8 @@ title = "Geometry"
 
 [[entries]]
 title = "vector"
-files = ["01_vector.cpp"]
+files = ["vector.cpp"]
 
 [[entries]]
 title = "seg_poly"
-files = ["02_seg_poly.cpp"]
+files = ["seg_poly.cpp"]

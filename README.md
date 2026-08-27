@@ -37,7 +37,7 @@ chapters/
 
 - 目录表示章节，必须包含 `_section.toml`，且不允许存在其他 TOML。
 - `_section.toml` 中的 `[[entries]]` 按书写顺序生成条目，不再依赖多个 TOML 文件名排序。
-- Markdown、C++ 和 Shell 文件名可以与标题完全不同，且不参与排序。
+- Markdown、C++ 和 Shell 源文件不使用数字排序前缀；文件名可以与标题完全不同，且不参与排序。
 - 只有被 `files` 引用的 `.md/.cpp/.hpp/.h/...` 会进入 PDF。
 - 图片建议放在 Markdown 相邻目录或 `assets/`。
 
