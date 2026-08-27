@@ -1,1 +1,9 @@
 title = "Geometry"
+
+[[entries]]
+title = "vector"
+files = ["01_vector.cpp"]
+
+[[entries]]
+title = "seg_poly"
+files = ["02_seg_poly.cpp"]

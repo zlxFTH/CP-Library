@@ -1,1 +1,13 @@
 title = "Basic"
+
+[[entries]]
+title = "test"
+files = ["00_test.sh"]
+
+[[entries]]
+title = "pai"
+files = ["01_pai.sh"]
+
+[[entries]]
+title = "run"
+files = ["02_run.sh"]

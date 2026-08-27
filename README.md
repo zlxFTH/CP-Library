@@ -24,53 +24,48 @@ cd Library
 
 ## 内容目录约定
 
-所有内容放在 `chapters/`。章节和条目都由外部 TOML 管理标题与内容：
+所有内容放在 `chapters/`。每个章节目录只有一个 `_section.toml`，统一管理章节和下面的所有条目：
 
 ```text
 chapters/
 └── 01_Geometry/
     ├── _section.toml
-    ├── 01_vector.toml
     ├── vector_intro.md
     ├── vector.cpp
     └── vector_examples.md
 ```
 
-- 目录表示章节，必须包含 `_section.toml`。
-- 其他 `.toml` 文件表示一个条目，一个条目只生成一次标题。
-- TOML 文件名的数字前缀控制条目之间的自然排序。
+- 目录表示章节，必须包含 `_section.toml`，且不允许存在其他 TOML。
+- `_section.toml` 中的 `[[entries]]` 按书写顺序生成条目，不再依赖多个 TOML 文件名排序。
 - Markdown、C++ 和 Shell 文件名可以与标题完全不同，且不参与排序。
-- 只有被 TOML 的 `files` 引用的 `.md/.cpp/.hpp/.h/...` 会进入 PDF。
+- 只有被 `files` 引用的 `.md/.cpp/.hpp/.h/...` 会进入 PDF。
 - 图片建议放在 Markdown 相邻目录或 `assets/`。
 
 ## 章节配置
 
-`_section.toml` 统一管理章节标题：
+`_section.toml` 的 `title` 管理章节标题，每个 `[[entries]]` 管理一个小节。`files` 按数组顺序拼接同一标题下的内容：
 
 ```toml
 title = "Geometry"
-```
 
-章节本身如果需要在子条目前直接放置内容，也可添加有序的 `files` 数组。
-
-## 条目配置
-
-普通 TOML 文件的 `title` 是标题的唯一来源，`files` 按数组顺序拼接同一标题下的内容：
-
-```toml
+[[entries]]
 title = "vector"
 files = [
   "vector_intro.md",
   "vector.cpp",
   "vector_examples.md",
 ]
+
+[[entries]]
+title = "seg_poly"
+files = ["seg_poly.cpp"]
 ```
 
-一个条目可以包含任意数量的 Markdown、C++ 和 Shell 文件。引用路径相对于所在 TOML，必须位于 `chapters/` 内。缺失文件、不支持的扩展名、越界路径或重复引用都会使构建失败。
+一个条目可以包含任意数量的 Markdown、C++ 和 Shell 文件。引用路径相对于 `_section.toml`，必须位于 `chapters/` 内。缺失文件、不支持的扩展名、越界路径或重复引用都会使构建失败。章节本身如果需要在条目前放置内容，也可在顶层添加 `files` 数组。
 
-Markdown 文件只写正文，不再使用 front matter；标题和排版字段统一放在条目 TOML 中。
+Markdown 文件只写正文，不再使用 front matter；标题和排版字段统一放在 `_section.toml` 中。
 
-章节与条目 TOML 都可使用：
+章节顶层与每个 `[[entries]]` 都可使用：
 
 - `wide = true`：在双栏书中临时切到单栏。
 - `page_break_before/page_break_after`：内容前后强制分页。

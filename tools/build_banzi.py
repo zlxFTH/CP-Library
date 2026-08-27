@@ -282,7 +282,7 @@ def render_source(path: Path, level: int, stats: Stats) -> str:
     if path.suffix.lower() == ".md":
         metadata, body = split_front_matter(path)
         if metadata:
-            fail(f"Markdown 元信息请统一移至条目 TOML：{path}")
+            fail(f"Markdown 元信息请统一移至 _section.toml 的对应 entry：{path}")
         stats.markdown_files += 1
         return pandoc_markdown(path, body, level).strip()
     stats.code_files += 1
@@ -309,31 +309,39 @@ def render_manifest_sources(
 
 
 def render_entry(
-    path: Path,
+    config_path: Path,
+    metadata: dict[str, Any],
     level: int,
     settings: Settings,
     stats: Stats,
     references: dict[Path, Path],
 ) -> str:
-    metadata = read_toml(path)
     if not enabled(metadata):
         return ""
     stats.entries += 1
-    parts = [heading(level, manifest_title(metadata, path))]
-    parts.extend(render_manifest_sources(path, metadata, level, settings, stats, references, required=True))
+    parts = [heading(level, manifest_title(metadata, config_path))]
+    parts.extend(
+        render_manifest_sources(
+            config_path, metadata, level, settings, stats, references, required=True
+        )
+    )
     return layout_wrap("\n".join(parts), metadata, settings.columns)
 
 
 def content_children(path: Path) -> list[Path]:
-    children: list[Path] = []
-    for child in path.iterdir():
-        if child.name.startswith(".") or child.name in {"README.md", "_section.toml"}:
-            continue
-        if child.is_dir():
-            children.append(child)
-        elif child.is_file() and child.suffix.lower() == ".toml":
-            children.append(child)
-    return sorted(children, key=natural_key)
+    return sorted(
+        (child for child in path.iterdir() if child.is_dir() and not child.name.startswith(".")),
+        key=natural_key,
+    )
+
+
+def section_entries(config_path: Path, metadata: dict[str, Any]) -> list[dict[str, Any]]:
+    raw_entries = metadata.get("entries", [])
+    if not isinstance(raw_entries, list) or any(
+        not isinstance(entry, dict) for entry in raw_entries
+    ):
+        fail(f"章节配置 entries 必须是 TOML 表数组：{config_path}")
+    return raw_entries
 
 
 def render_directory(
@@ -347,6 +355,12 @@ def render_directory(
     if not config_path.is_file():
         fail(f"章节目录缺少 _section.toml：{path}")
     metadata = read_toml(config_path)
+    extra_configs = sorted(
+        (child for child in path.glob("*.toml") if child.name != "_section.toml"),
+        key=natural_key,
+    )
+    if extra_configs:
+        fail(f"章节目录只允许一个 _section.toml：{extra_configs[0]}")
     if not enabled(metadata):
         return ""
 
@@ -354,11 +368,10 @@ def render_directory(
     parts = [heading(level, manifest_title(metadata, config_path))]
     parts.extend(render_manifest_sources(config_path, metadata, level, settings, stats, references, required=False))
 
+    for entry in section_entries(config_path, metadata):
+        parts.append(render_entry(config_path, entry, level + 1, settings, stats, references))
     for child in content_children(path):
-        if child.is_dir():
-            parts.append(render_directory(child, level + 1, settings, stats, references))
-        else:
-            parts.append(render_entry(child, level + 1, settings, stats, references))
+        parts.append(render_directory(child, level + 1, settings, stats, references))
 
     return layout_wrap("\n".join(parts), metadata, settings.columns)
 
@@ -366,12 +379,12 @@ def render_directory(
 def render_source_tree(settings: Settings, stats: Stats) -> str:
     parts: list[str] = []
     references: dict[Path, Path] = {}
+    root_configs = sorted(settings.source_dir.glob("*.toml"), key=natural_key)
+    if root_configs:
+        fail(f"内容根目录不允许 TOML，请放入章节目录：{root_configs[0]}")
 
     for child in content_children(settings.source_dir):
-        if child.is_dir():
-            parts.append(render_directory(child, 1, settings, stats, references))
-        else:
-            parts.append(render_entry(child, 1, settings, stats, references))
+        parts.append(render_directory(child, 1, settings, stats, references))
 
     content = "\n".join(part for part in parts if part.strip()).strip()
     if not content:
@@ -521,7 +534,7 @@ def main() -> int:
         print("Library 检查通过")
         print(f"  内容目录：{settings.source_dir}")
         print(f"  章节目录：{stats.directories}")
-        print(f"  条目配置：{stats.entries}")
+        print(f"  条目：{stats.entries}")
         print(f"  Markdown：{stats.markdown_files}")
         print(f"  代码片段：{stats.code_files}")
         for name, path in tools.items():
