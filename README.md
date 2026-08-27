@@ -1,6 +1,6 @@
 # Library
 
-把分散的 Markdown 知识点和 C++ 代码片段生成一份紧凑的中文 LaTeX 模板书。
+把分散的 Markdown 知识点和代码片段生成一份紧凑的中文 LaTeX 模板书。
 
 ## 快速开始
 
@@ -39,7 +39,7 @@ chapters/
 - 目录表示章节，必须包含 `_section.toml`。
 - 其他 `.toml` 文件表示一个条目，一个条目只生成一次标题。
 - TOML 文件名的数字前缀控制条目之间的自然排序。
-- Markdown 和 C++ 文件名可以与标题完全不同，且不参与排序。
+- Markdown、C++ 和 Shell 文件名可以与标题完全不同，且不参与排序。
 - 只有被 TOML 的 `files` 引用的 `.md/.cpp/.hpp/.h/...` 会进入 PDF。
 - 图片建议放在 Markdown 相邻目录或 `assets/`。
 
@@ -66,7 +66,7 @@ files = [
 ]
 ```
 
-一个条目可以包含任意数量的 Markdown 和 C++ 文件。引用路径相对于所在 TOML，必须位于 `chapters/` 内。缺失文件、不支持的扩展名、越界路径或重复引用都会使构建失败。
+一个条目可以包含任意数量的 Markdown、C++ 和 Shell 文件。引用路径相对于所在 TOML，必须位于 `chapters/` 内。缺失文件、不支持的扩展名、越界路径或重复引用都会使构建失败。
 
 Markdown 文件只写正文，不再使用 front matter；标题和排版字段统一放在条目 TOML 中。
 
@@ -80,7 +80,7 @@ Markdown 文件只写正文，不再使用 front matter；标题和排版字段�
 
 - 默认 A4 横向双栏、紧凑页边距、自动目录和页眉页脚；正文先排满左栏，再从右栏顶部继续向下排列。
 - 中文使用 XeLaTeX、CTeX 和 Fandol 字体。
-- C++ 使用 `listings`，支持中文注释、折行和可选行号。
+- C++ 和 Shell 使用 `listings`，支持语法高亮、中文注释、折行和可选行号。
 - Markdown 由 Pandoc 转换；宽表格请设置 `wide = true`，因为 `longtable` 不能直接放在双栏中。
 - `book.toml` 控制书名、作者、列数、代码行号和输出文件名。
 

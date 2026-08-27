@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a compact LaTeX codebook from Markdown notes and C++ snippets."""
+"""Generate a compact LaTeX codebook from Markdown notes and code snippets."""
 
 from __future__ import annotations
 
@@ -20,7 +20,8 @@ CONFIG_FILE = PROJECT_ROOT / "book.toml"
 BUILD_DIR = PROJECT_ROOT / "build"
 DIST_DIR = PROJECT_ROOT / "dist"
 
-DEFAULT_CODE_EXTENSIONS = {".cpp", ".cc", ".cxx", ".hpp", ".hh", ".h"}
+DEFAULT_CODE_EXTENSIONS = {".cpp", ".cc", ".cxx", ".hpp", ".hh", ".h", ".sh"}
+LISTING_LANGUAGES = {".sh": "bash"}
 REQUIRED_TEX_FILES = (
     "ctexart.cls",
     "xeCJK.sty",
@@ -285,7 +286,10 @@ def render_source(path: Path, level: int, stats: Stats) -> str:
         stats.markdown_files += 1
         return pandoc_markdown(path, body, level).strip()
     stats.code_files += 1
-    return f"\\lstinputlisting[style=librarycpp]{{{listing_path(path)}}}"
+    options = ["style=librarycpp"]
+    if language := LISTING_LANGUAGES.get(path.suffix.lower()):
+        options.append(f"language={language}")
+    return f"\\lstinputlisting[{','.join(options)}]{{{listing_path(path)}}}"
 
 
 def render_manifest_sources(
@@ -498,7 +502,7 @@ def compile_pdf(settings: Settings, tools: dict[str, str], main_tex: Path) -> Pa
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="从 Markdown 与 C++ 片段生成 LaTeX 模板书")
+    parser = argparse.ArgumentParser(description="从 Markdown 与代码片段生成 LaTeX 模板书")
     parser.add_argument("--check", action="store_true", help="只检查配置、依赖和内容，不写文件")
     parser.add_argument("--tex-only", action="store_true", help="只生成 TeX，不编译 PDF")
     parser.add_argument("--clean", action="store_true", help="构建前清理 build/ 与 dist/ 中的旧产物")
@@ -519,7 +523,7 @@ def main() -> int:
         print(f"  章节目录：{stats.directories}")
         print(f"  条目配置：{stats.entries}")
         print(f"  Markdown：{stats.markdown_files}")
-        print(f"  C++ 片段：{stats.code_files}")
+        print(f"  代码片段：{stats.code_files}")
         for name, path in tools.items():
             print(f"  {name}：{path}")
         return 0

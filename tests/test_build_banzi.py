@@ -84,6 +84,15 @@ class ManifestRenderingTests(unittest.TestCase):
         with self.assertRaisesRegex(build_banzi.BuildError, "title"):
             build_banzi.render_source_tree(self.settings, build_banzi.Stats())
 
+    def test_shell_source_uses_bash_language(self):
+        self.settings.code_extensions.add(".sh")
+        self.write("test.sh", "mk() { g++ -o $1 $1.cpp -O2; }")
+        self.write("01_test.toml", 'title = "test"\nfiles = ["test.sh"]\n')
+
+        rendered = build_banzi.render_source_tree(self.settings, build_banzi.Stats())
+
+        self.assertIn("[style=librarycpp,language=bash]", rendered)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -11,4 +11,4 @@ toc_depth = 3
 code_line_numbers = false
 
 [render]
-code_extensions = [".cpp", ".cc", ".cxx", ".hpp", ".hh", ".h"]
+code_extensions = [".cpp", ".cc", ".cxx", ".hpp", ".hh", ".h", ".sh"]
