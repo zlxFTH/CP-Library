@@ -1,6 +1,6 @@
 [book]
 title = "ICPC Algorithm Library"
-subtitle = "C++ 模板与知识点备忘"
+subtitle = ""
 author = "Nalumi"
 date = ""
 source_dir = "chapters"
@@ -12,4 +12,3 @@ code_line_numbers = false
 
 [render]
 code_extensions = [".cpp", ".cc", ".cxx", ".hpp", ".hh", ".h"]
-

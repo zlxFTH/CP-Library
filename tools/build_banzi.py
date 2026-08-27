@@ -349,9 +349,19 @@ def graphic_paths(settings: Settings) -> str:
 def render_main_tex(settings: Settings) -> str:
     template = settings.template.read_text(encoding="utf-8")
     date = latex_escape(settings.date) if settings.date else r"\today"
+    subtitle_block = ""
+    if settings.subtitle:
+        subtitle_block = "\n".join(
+            (
+                r"  \vspace{0.9em}",
+                r"  {\Large\color{LibraryGray}"
+                + latex_escape(settings.subtitle)
+                + r"\par}",
+            )
+        )
     replacements = {
         "@@TITLE@@": latex_escape(settings.title),
-        "@@SUBTITLE@@": latex_escape(settings.subtitle),
+        "@@SUBTITLE_BLOCK@@": subtitle_block,
         "@@AUTHOR@@": latex_escape(settings.author),
         "@@DATE@@": date,
         "@@TOC_DEPTH@@": str(settings.toc_depth),
