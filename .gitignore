@@ -2,6 +2,6 @@
 !/build/.gitkeep
 /dist/*
 !/dist/.gitkeep
+!/dist/Library.pdf
 __pycache__/
 *.pyc
-
