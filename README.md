@@ -24,59 +24,57 @@ cd Library
 
 ## 内容目录约定
 
-所有内容放在 `chapters/`。目录与文件使用数字前缀控制顺序：
+所有内容放在 `chapters/`。章节和条目都由外部 TOML 管理标题与内容：
 
 ```text
 chapters/
-├── 01_基础/
-│   ├── index.md
-│   ├── 01_fast_io.cpp
-│   ├── 01_fast_io.cpp.toml
-│   └── 02_复盘记录.md
-└── 02_图论/
-    ├── 01_最短路.md
-    └── 02_dijkstra.cpp
+└── 01_Geometry/
+    ├── _section.toml
+    ├── 01_点和向量.toml
+    ├── point_intro.md
+    ├── p2.cpp
+    └── point_examples.md
 ```
 
-- 文件夹：生成章节标题。
-- `index.md`：生成文件夹开场正文，不重复生成标题。
-- 其他 `.md`：生成一个带标题的知识点条目。
-- `.cpp/.hpp/.h/...`：生成一个带标题的 C++ 代码条目。
-- 其他文件默认忽略；图片建议放在相邻目录或 `assets/`。
+- 目录表示章节，必须包含 `_section.toml`。
+- 其他 `.toml` 文件表示一个条目，一个条目只生成一次标题。
+- TOML 文件名的数字前缀控制条目之间的自然排序。
+- Markdown 和 C++ 文件名可以与标题完全不同，且不参与排序。
+- 只有被 TOML 的 `files` 引用的 `.md/.cpp/.hpp/.h/...` 会进入 PDF。
+- 图片建议放在 Markdown 相邻目录或 `assets/`。
 
-标题默认来自文件名：去掉开头数字，将 `_` 和 `-` 转为空格。
+## 章节配置
 
-## Markdown 元信息
-
-Markdown 文件可使用 TOML front matter：
-
-```markdown
-+++
-title = "最短路备忘"
-wide = true
-page_break_before = true
-page_break_after = false
-enabled = true
-+++
-
-这里开始写正文。
-```
-
-字段含义：
-
-- `title`：覆盖文件名生成的标题。
-- `wide`：在双栏书中临时切到单栏，适合宽表格和宽公式。
-- `page_break_before/page_break_after`：条目前后强制分页。
-- `enabled = false`：暂时排除该文件。
-
-文件夹可以使用 `_section.toml` 设置同样的字段。C++ 文件使用同名旁车配置，例如 `dijkstra.cpp.toml`：
+`_section.toml` 统一管理章节标题：
 
 ```toml
-title = "Dijkstra"
-wide = false
-page_break_before = false
-enabled = true
+title = "Geometry"
 ```
+
+章节本身如果需要在子条目前直接放置内容，也可添加有序的 `files` 数组。
+
+## 条目配置
+
+普通 TOML 文件的 `title` 是标题的唯一来源，`files` 按数组顺序拼接同一标题下的内容：
+
+```toml
+title = "点和向量"
+files = [
+  "point_intro.md",
+  "p2.cpp",
+  "point_examples.md",
+]
+```
+
+一个条目可以包含任意数量的 Markdown 和 C++ 文件。引用路径相对于所在 TOML，必须位于 `chapters/` 内。缺失文件、不支持的扩展名、越界路径或重复引用都会使构建失败。
+
+Markdown 文件只写正文，不再使用 front matter；标题和排版字段统一放在条目 TOML 中。
+
+章节与条目 TOML 都可使用：
+
+- `wide = true`：在双栏书中临时切到单栏。
+- `page_break_before/page_break_after`：内容前后强制分页。
+- `enabled = false`：暂时排除该章节或条目。
 
 ## 排版说明
 

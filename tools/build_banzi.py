@@ -55,6 +55,7 @@ class Settings:
 @dataclass
 class Stats:
     directories: int = 0
+    entries: int = 0
     markdown_files: int = 0
     code_files: int = 0
 
@@ -131,13 +132,6 @@ def natural_key(path: Path) -> tuple[Any, ...]:
     return tuple(int(part) if part.isdigit() else part.casefold() for part in re.split(r"(\d+)", path.name))
 
 
-def display_title(path: Path) -> str:
-    name = path.stem if path.is_file() else path.name
-    name = re.sub(r"^\d+[._\-\s]*", "", name)
-    name = re.sub(r"[_\-]+", " ", name).strip()
-    return name or path.stem or path.name
-
-
 def latex_escape(text: str) -> str:
     replacements = {
         "\\": r"\textbackslash{}",
@@ -171,16 +165,6 @@ def split_front_matter(path: Path) -> tuple[dict[str, Any], str]:
     except tomllib.TOMLDecodeError as exc:
         fail(f"TOML front matter 语法错误：{path}: {exc}")
     return metadata, body
-
-
-def sidecar_metadata(path: Path) -> dict[str, Any]:
-    sidecar = path.with_name(f"{path.name}.toml")
-    return read_toml(sidecar) if sidecar.is_file() else {}
-
-
-def directory_metadata(path: Path) -> dict[str, Any]:
-    metadata_file = path / "_section.toml"
-    return read_toml(metadata_file) if metadata_file.is_file() else {}
 
 
 def enabled(metadata: dict[str, Any]) -> bool:
@@ -239,21 +223,6 @@ def layout_wrap(content: str, metadata: dict[str, Any], columns: int) -> str:
     return "\n".join(chunk for chunk in chunks if chunk) + "\n"
 
 
-def render_markdown(path: Path, level: int, settings: Settings, stats: Stats, *, index: bool = False) -> str:
-    metadata, body = split_front_matter(path)
-    if not enabled(metadata):
-        return ""
-
-    stats.markdown_files += 1
-    converted = pandoc_markdown(path, body, level if index else level)
-    if index:
-        content = converted
-    else:
-        title = str(metadata.get("title", display_title(path))).strip()
-        content = heading(level, title) + converted
-    return layout_wrap(content, metadata, settings.columns)
-
-
 def listing_path(path: Path) -> str:
     relative = os.path.relpath(path, BUILD_DIR).replace(os.sep, "/")
     if any(character in relative for character in "%#{}"):
@@ -261,76 +230,148 @@ def listing_path(path: Path) -> str:
     return relative
 
 
-def render_code(path: Path, level: int, settings: Settings, stats: Stats) -> str:
-    metadata = sidecar_metadata(path)
+def manifest_title(metadata: dict[str, Any], path: Path) -> str:
+    title = metadata.get("title")
+    if not isinstance(title, str) or not title.strip():
+        fail(f"TOML 配置 title 必须是非空字符串：{path}")
+    return title.strip()
+
+
+def manifest_sources(
+    config_path: Path,
+    metadata: dict[str, Any],
+    settings: Settings,
+    references: dict[Path, Path],
+    *,
+    required: bool,
+) -> list[Path]:
+    raw_files = metadata.get("files")
+    if raw_files is None:
+        if required:
+            fail(f"条目配置缺少 files：{config_path}")
+        return []
+    if not isinstance(raw_files, list) or any(
+        not isinstance(item, str) or not item.strip() for item in raw_files
+    ):
+        fail(f"配置 files 必须是非空路径字符串数组：{config_path}")
+    if required and not raw_files:
+        fail(f"条目配置 files 不能为空：{config_path}")
+
+    sources: list[Path] = []
+    for raw in raw_files:
+        relative = Path(raw)
+        if relative.is_absolute():
+            fail(f"配置 files 只能使用相对路径：{config_path}: {raw}")
+        source = (config_path.parent / relative).resolve()
+        if not source.is_relative_to(settings.source_dir):
+            fail(f"配置 files 不能离开内容目录：{config_path}: {raw}")
+        if not source.is_file():
+            fail(f"配置引用的文件不存在：{config_path}: {raw}")
+        suffix = source.suffix.lower()
+        if suffix != ".md" and suffix not in settings.code_extensions:
+            fail(f"配置引用了不支持的文件类型：{config_path}: {raw}")
+        if source in references:
+            fail(f"内容文件被重复引用：{source}\n  首次：{references[source]}\n  再次：{config_path}")
+        references[source] = config_path
+        sources.append(source)
+    return sources
+
+
+def render_source(path: Path, level: int, stats: Stats) -> str:
+    if path.suffix.lower() == ".md":
+        metadata, body = split_front_matter(path)
+        if metadata:
+            fail(f"Markdown 元信息请统一移至条目 TOML：{path}")
+        stats.markdown_files += 1
+        return pandoc_markdown(path, body, level).strip()
+    stats.code_files += 1
+    return f"\\lstinputlisting[style=librarycpp]{{{listing_path(path)}}}"
+
+
+def render_manifest_sources(
+    config_path: Path,
+    metadata: dict[str, Any],
+    level: int,
+    settings: Settings,
+    stats: Stats,
+    references: dict[Path, Path],
+    *,
+    required: bool,
+) -> list[str]:
+    return [
+        render_source(source, level, stats)
+        for source in manifest_sources(config_path, metadata, settings, references, required=required)
+    ]
+
+
+def render_entry(
+    path: Path,
+    level: int,
+    settings: Settings,
+    stats: Stats,
+    references: dict[Path, Path],
+) -> str:
+    metadata = read_toml(path)
     if not enabled(metadata):
         return ""
-
-    stats.code_files += 1
-    title = str(metadata.get("title", display_title(path))).strip()
-    content = heading(level, title)
-    content += f"\\lstinputlisting[style=librarycpp]{{{listing_path(path)}}}\n"
-    return layout_wrap(content, metadata, settings.columns)
+    stats.entries += 1
+    parts = [heading(level, manifest_title(metadata, path))]
+    parts.extend(render_manifest_sources(path, metadata, level, settings, stats, references, required=True))
+    return layout_wrap("\n".join(parts), metadata, settings.columns)
 
 
-def render_file(path: Path, level: int, settings: Settings, stats: Stats) -> str:
-    suffix = path.suffix.lower()
-    if suffix == ".md":
-        return render_markdown(path, level, settings, stats)
-    if suffix in settings.code_extensions:
-        return render_code(path, level, settings, stats)
-    return ""
-
-
-def content_children(path: Path, settings: Settings) -> list[Path]:
+def content_children(path: Path) -> list[Path]:
     children: list[Path] = []
     for child in path.iterdir():
-        if child.name.startswith(".") or child.name in {"index.md", "README.md", "_section.toml"}:
+        if child.name.startswith(".") or child.name in {"README.md", "_section.toml"}:
             continue
         if child.is_dir():
             children.append(child)
-        elif child.is_file() and (child.suffix.lower() == ".md" or child.suffix.lower() in settings.code_extensions):
+        elif child.is_file() and child.suffix.lower() == ".toml":
             children.append(child)
     return sorted(children, key=natural_key)
 
 
-def render_directory(path: Path, level: int, settings: Settings, stats: Stats) -> str:
-    metadata = directory_metadata(path)
+def render_directory(
+    path: Path,
+    level: int,
+    settings: Settings,
+    stats: Stats,
+    references: dict[Path, Path],
+) -> str:
+    config_path = path / "_section.toml"
+    if not config_path.is_file():
+        fail(f"章节目录缺少 _section.toml：{path}")
+    metadata = read_toml(config_path)
     if not enabled(metadata):
         return ""
 
     stats.directories += 1
-    title = str(metadata.get("title", display_title(path))).strip()
-    parts = [heading(level, title)]
+    parts = [heading(level, manifest_title(metadata, config_path))]
+    parts.extend(render_manifest_sources(config_path, metadata, level, settings, stats, references, required=False))
 
-    index_file = path / "index.md"
-    if index_file.is_file():
-        parts.append(render_markdown(index_file, level, settings, stats, index=True))
-
-    for child in content_children(path, settings):
+    for child in content_children(path):
         if child.is_dir():
-            parts.append(render_directory(child, level + 1, settings, stats))
+            parts.append(render_directory(child, level + 1, settings, stats, references))
         else:
-            parts.append(render_file(child, level + 1, settings, stats))
+            parts.append(render_entry(child, level + 1, settings, stats, references))
 
     return layout_wrap("\n".join(parts), metadata, settings.columns)
 
 
 def render_source_tree(settings: Settings, stats: Stats) -> str:
     parts: list[str] = []
-    root_index = settings.source_dir / "index.md"
-    if root_index.is_file():
-        parts.append(render_markdown(root_index, 0, settings, stats, index=True))
+    references: dict[Path, Path] = {}
 
-    for child in content_children(settings.source_dir, settings):
+    for child in content_children(settings.source_dir):
         if child.is_dir():
-            parts.append(render_directory(child, 1, settings, stats))
+            parts.append(render_directory(child, 1, settings, stats, references))
         else:
-            parts.append(render_file(child, 1, settings, stats))
+            parts.append(render_entry(child, 1, settings, stats, references))
 
     content = "\n".join(part for part in parts if part.strip()).strip()
     if not content:
-        fail(f"内容目录中没有可生成的 Markdown 或代码文件：{settings.source_dir}")
+        fail(f"内容目录中没有启用的条目配置：{settings.source_dir}")
     return content + "\n"
 
 
@@ -476,6 +517,7 @@ def main() -> int:
         print("Library 检查通过")
         print(f"  内容目录：{settings.source_dir}")
         print(f"  章节目录：{stats.directories}")
+        print(f"  条目配置：{stats.entries}")
         print(f"  Markdown：{stats.markdown_files}")
         print(f"  C++ 片段：{stats.code_files}")
         for name, path in tools.items():
@@ -494,7 +536,10 @@ def main() -> int:
 
     print(f"已生成：{main_file}")
     print(f"已生成：{content_file}")
-    print(f"内容：{stats.directories} 个目录，{stats.markdown_files} 个 Markdown，{stats.code_files} 个代码片段")
+    print(
+        f"内容：{stats.directories} 个目录，{stats.entries} 个条目，"
+        f"{stats.markdown_files} 个 Markdown，{stats.code_files} 个代码片段"
+    )
 
     if args.tex_only:
         return 0
