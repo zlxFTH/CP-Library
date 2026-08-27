@@ -1,2 +1,2 @@
 title = "test"
-files = ["00_test.sh"]
+files = ["00_test.sh", "01_pai.sh"]
