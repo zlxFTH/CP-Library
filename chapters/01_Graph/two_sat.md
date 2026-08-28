@@ -1,9 +1,4 @@
-对 $u_a\lor v_b$，加入两条边
-
-$$
-u_{a\oplus1}\to v_b,\qquad
-v_{b\oplus1}\to u_a.
-$$
+对 $u_a\lor v_b$，加入两条边 $u_{a\oplus1}\to v_b$ 和 $v_{b\oplus1}\to u_a$。
 
 常见限制的建边方式如下：
 
