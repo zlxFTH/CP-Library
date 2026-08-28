@@ -1,11 +1,11 @@
 int tim = 0, scc = 0;
 vector<int> dfn(n), low(n), bel(n, -1), stk;
-auto tarjan = [&](auto self, int u) -> void {
+auto tarjan = [&](auto _, int u) -> void {
   dfn[u] = low[u] = ++tim;
   stk.push_back(u);
   for (int v : G[u]) {
     if (!dfn[v]) {
-      self(self, v);
+      _(_, v);
       low[u] = min(low[u], low[v]);
     } else if (bel[v] == -1) {
       low[u] = min(low[u], dfn[v]);
