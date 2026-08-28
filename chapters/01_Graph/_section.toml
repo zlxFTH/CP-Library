@@ -11,3 +11,7 @@ files = ["tarjan.cpp"]
 [[entries]]
 title = "2-SAT"
 files = ["two_sat.md"]
+
+[[entries]]
+title = "Segment Tree Graph"
+files = ["segment_graph.md", "segment_graph.cpp"]
