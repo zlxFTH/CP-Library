@@ -1,0 +1,2 @@
+- 求质数 $p$ 的最小正原根，依赖前一个 Miller--Rabin / Pollard--Rho 条目。
+- 这里只处理质数模数；`primitive_root(2)=1`。

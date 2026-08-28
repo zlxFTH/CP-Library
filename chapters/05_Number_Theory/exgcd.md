@@ -1,0 +1,2 @@
+- `exgcd(a,b,x,y)` 要求 $a,b\ge 0$ 且不同时为零，返回 $g=\gcd(a,b)$，并满足 $ax+by=g$。
+- `linear_congruence(a,b,m)` 求 $ax\equiv b\pmod m$。无解返回 `nullopt`；否则返回 `{r,p}`，全部解为 $x\equiv r\pmod p$。
