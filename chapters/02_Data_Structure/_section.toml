@@ -1,7 +1,7 @@
 title = "Data Structure"
 
 [[entries]]
-title = "SGT"
+title = "线段树"
 files = ["sgt.md", "sgt.cpp"]
 
 [[entries]]
