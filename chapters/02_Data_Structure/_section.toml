@@ -2,7 +2,7 @@ title = "Data Structure"
 
 [[entries]]
 title = "线段树"
-files = ["sgt.md", "sgt.cpp", "sgt_usage.cpp"]
+files = ["sgt.cpp", "sgt_usage.cpp"]
 
 [[entries]]
 title = "LazySGT"
