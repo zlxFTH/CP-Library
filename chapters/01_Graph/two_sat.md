@@ -1,4 +1,4 @@
-对 $u_a\lor v_b$，加入两条边 $u_{a\oplus1}\to v_b$ 和 $v_{b\oplus1}\to u_a$。
+- $u_a\lor v_b$：加入 $u_{a\oplus1}\to v_b$ 和 $v_{b\oplus1}\to u_a$。
 
 - $u_a\Rightarrow v_b$：加入 $u_a\to v_b$ 和 $v_{b\oplus1}\to u_{a\oplus1}$。
 - 强制 $u=a$：加入 $u_{a\oplus1}\to u_a$。
