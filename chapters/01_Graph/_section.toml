@@ -3,3 +3,11 @@ title = "Graph"
 [[entries]]
 title = "Dijkstra"
 files = ["dijkstra.cpp"]
+
+[[entries]]
+title = "Tarjan SCC"
+files = ["tarjan.cpp"]
+
+[[entries]]
+title = "2-SAT"
+files = ["two_sat.md"]
