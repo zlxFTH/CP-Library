@@ -14,6 +14,4 @@ $$
 
 \noindent 若存在 $u$ 满足 $u_0,u_1$ 在同一强连通分量中，则无解。
 
-$$
-\operatorname{ans}_u=[\operatorname{bel}_{u_0}>\operatorname{bel}_{u_1}].
-$$
+\noindent 构造：$\operatorname{ans}_u=[\operatorname{bel}_{u_0}>\operatorname{bel}_{u_1}]$。
