@@ -12,6 +12,7 @@
 \usepackage{titlesec}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+\usepackage{multicol}
 \usepackage{hyperref}
 \usepackage{bookmark}
 \usepackage{url}
@@ -189,11 +190,13 @@
 \end{titlepage}
 
 \pagenumbering{roman}
-@@COLUMN_START@@
+\begin{multicols}{3}
 \tableofcontents
+\end{multicols}
 \clearpage
 
 \pagenumbering{arabic}
+@@COLUMN_START@@
 \fontsize{9pt}{10.8pt}\selectfont
 \input{generated-content.tex}
 

@@ -31,6 +31,7 @@ REQUIRED_TEX_FILES = (
     "enumitem.sty",
     "fancyhdr.sty",
     "lastpage.sty",
+    "multicol.sty",
 )
 
 
