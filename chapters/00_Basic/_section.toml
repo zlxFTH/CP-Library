@@ -19,3 +19,7 @@ files = ["src.cpp"]
 [[entries]]
 title = "随机数"
 files = ["random.cpp"]
+
+[[entries]]
+title = "Matrix"
+files = ["matrix.cpp"]
