@@ -1,0 +1,25 @@
+title = "Data Structure"
+
+[[entries]]
+title = "SGT"
+files = ["sgt.md", "sgt.cpp"]
+
+[[entries]]
+title = "LazySGT"
+files = ["lazy_sgt.md", "lazy_sgt.cpp", "lazy_sgt_usage.cpp"]
+
+[[entries]]
+title = "Chairman Tree"
+files = ["chairman.md", "chairman.cpp", "chairman_usage.cpp"]
+
+[[entries]]
+title = "Li Chao Tree"
+files = ["li_chao.md", "li_chao.cpp"]
+
+[[entries]]
+title = "Segment Tree Beats"
+files = ["segment_tree_beats.md", "segment_tree_beats.cpp"]
+
+[[entries]]
+title = "Segment Tree Merge / Split"
+files = ["segment_tree_merge_split.md", "segment_tree_merge_split.cpp"]
