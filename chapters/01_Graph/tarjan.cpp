@@ -1,6 +1,6 @@
 int tim = 0, scc = 0;
 vector<int> dfn(n), low(n), bel(n, -1), stk;
-auto tarjan = [&](auto _, int u) -> void {
+auto tarj = [&](auto _, int u) -> void {
   dfn[u] = low[u] = ++tim;
   stk.push_back(u);
   for (int v : G[u]) {
@@ -21,5 +21,5 @@ auto tarjan = [&](auto _, int u) -> void {
   scc++;
 };
 for (int u = 0; u < n; u++) {
-  if (!dfn[u]) tarjan(tarjan, u);
+  if (!dfn[u]) tarj(tarj, u);
 }
