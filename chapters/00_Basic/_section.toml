@@ -11,3 +11,7 @@ files = ["pai.sh"]
 [[entries]]
 title = "run"
 files = ["run.sh"]
+
+[[entries]]
+title = "缺省源"
+files = ["src.cpp"]
