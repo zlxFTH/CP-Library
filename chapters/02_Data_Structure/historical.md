@@ -1,4 +1,4 @@
-\noindent 以下均基于 3.2，只列出需要替换的 `V`、`merge`、`L`、`apply` 和 `mdf`。
+\noindent 以下均基于 3.2，只列出需要替换的 `V`、`merge`、`L` 和 `apply`。
 
 \noindent\textbf{历史版本和}
 
@@ -31,3 +31,9 @@ seg.mdf(l, r, {x, -1LL * t * x});
 auto v = seg.qry(l, r);
 LL ans = v.a * t + v.b;
 ```
+
+\noindent\textbf{历史最小值个数和}
+
+\noindent `mn/cmn` 为当前最小值及其位置数，`hmn/chmn` 为所有历史版本中的最小值及其出现次数之和。Lazy Tag 表示尚未下传的一串区间加：`add` 为总增量，`pre/cpre` 为非空前缀和的最小值及其出现次数；`merge(L x,L y)` 表示先执行 `x`，再执行 `y`。
+
+\noindent 叶子初始化为 `{A[i],1,A[i],1}`，一次区间加 `x` 使用 `{x,x,1}`，查询 `chmn`。CF997E 中维护的值始终非负且历史最小值为 $0$，因此 `chmn` 就是历史上 $0$ 的个数和。

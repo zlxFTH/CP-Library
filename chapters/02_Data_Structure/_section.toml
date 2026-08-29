@@ -32,4 +32,4 @@ files = ["segment_tree_merge_split.md", "segment_tree_merge_split.cpp"]
 
 [[entries]]
 title = "历史操作"
-files = ["historical.md", "historical_min_sum.cpp"]
+files = ["historical.md", "historical_min_count.cpp"]
