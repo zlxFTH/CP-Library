@@ -1,68 +1,49 @@
-struct LiChao {
+#define ls(p) t[p].ls
+#define rs(p) t[p].rs
+struct SGT {
   static constexpr LL INF = (LL)4e18;
-  struct Line {
-    LL k, b;
-    Line(LL k = 0, LL b = INF) : k(k), b(b) {}
-    LL get(LL x) {
-      I y = (I)k * x + b;
-      if (y > INF) return INF;
-      if (y < -INF) return -INF;
-      return y;
-    }
+  struct V {
+    LL k = 0, b = INF;
+    I get(LL x) { return (I)k * x + b; }
   };
   struct Node {
-    Line f;
-    int ls = 0, rs = 0;
+    int ls, rs;
+    V v;
   };
-  int L, R;
-  vector<Node> t = {Node(), Node()};
-  LiChao(int L, int R) : L(L), R(R) { assert(L < R); }
+  int n;
+  vector<Node> t = {{}};
   int node() {
-    t.emplace_back();
+    t.push_back({});
     return SZ(t) - 1;
   }
-  void add(Line f, int p, int l, int r) {
-    int m = l + (r - l) / 2;
-    bool x = f.get(l) < t[p].f.get(l);
-    bool y = f.get(m) < t[p].f.get(m);
-    if (y) swap(f, t[p].f);
-    if (r - l == 1) return;
-    if (x != y) {
-      if (!t[p].ls) t[p].ls = node();
-      add(f, t[p].ls, l, m);
-    } else {
-      if (!t[p].rs) t[p].rs = node();
-      add(f, t[p].rs, m, r);
-    }
+  int add(V v, int p, int l = 0, int r = -1) {
+    if (r < 0) r = n;
+    if (!p) p = node();
+    int m = (l + r) / 2;
+    if (v.get(m) < t[p].v.get(m)) swap(v, t[p].v);
+    if (r - l == 1) return p;
+    if (v.get(l) < t[p].v.get(l)) ls(p) = add(v, ls(p), l, m);
+    else if (v.get(r - 1) < t[p].v.get(r - 1)) rs(p) = add(v, rs(p), m, r);
+    return p;
   }
-  void add(Line f) { add(f, 1, L, R); }
-  void add(int ql, int qr, Line f, int p, int l, int r) {
-    if (qr <= l || r <= ql) return;
-    if (ql <= l && r <= qr) return add(f, p, l, r);
-    int m = l + (r - l) / 2;
-    if (ql < m) {
-      if (!t[p].ls) t[p].ls = node();
-      add(ql, qr, f, t[p].ls, l, m);
-    }
-    if (m < qr) {
-      if (!t[p].rs) t[p].rs = node();
-      add(ql, qr, f, t[p].rs, m, r);
-    }
+  int add(int ql, int qr, V v, int p, int l = 0, int r = -1) {
+    if (r < 0) r = n;
+    if (ql <= l && r <= qr) return add(v, p, l, r);
+    if (!p) p = node();
+    int m = (l + r) / 2;
+    if (ql < m) ls(p) = add(ql, qr, v, ls(p), l, m);
+    if (m < qr) rs(p) = add(ql, qr, v, rs(p), m, r);
+    return p;
   }
-  void add(int l, int r, Line f) {
-    assert(L <= l && l <= r && r <= R);
-    if (l < r) add(l, r, f, 1, L, R);
-  }
-  LL qry(int x, int p, int l, int r) {
+  LL qry(int x, int p, int l = 0, int r = -1) {
+    if (r < 0) r = n;
     if (!p) return INF;
-    LL ans = t[p].f.get(x);
+    LL ans = clamp<I>(t[p].v.get(x), -INF, INF);
     if (r - l == 1) return ans;
-    int m = l + (r - l) / 2;
-    if (x < m) return min(ans, qry(x, t[p].ls, l, m));
-    return min(ans, qry(x, t[p].rs, m, r));
-  }
-  LL qry(int x) {
-    assert(L <= x && x < R);
-    return qry(x, 1, L, R);
+    int m = (l + r) / 2;
+    if (x < m) return min(ans, qry(x, ls(p), l, m));
+    return min(ans, qry(x, rs(p), m, r));
   }
 };
+#undef ls
+#undef rs

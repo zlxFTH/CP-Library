@@ -23,7 +23,7 @@ files = [
 ]
 
 [[entries]]
-title = "Li Chao Tree"
+title = "李超树"
 files = ["li_chao.md", "li_chao.cpp"]
 
 [[entries]]
