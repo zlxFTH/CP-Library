@@ -1,8 +1,7 @@
 #define ls(p) t[p].ls
 #define rs(p) t[p].rs
 struct SGT {
-  struct V {
-  };
+  struct V {};
   struct Node {
     int ls, rs;
     V v;
