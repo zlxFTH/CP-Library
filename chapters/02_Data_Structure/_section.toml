@@ -13,8 +13,8 @@ title = "线段树二分"
 files = ["sgt_bisect.md", "sgt_bisect.cpp"]
 
 [[entries]]
-title = "Chairman Tree"
-files = ["chairman.md", "chairman.cpp", "chairman_usage.cpp"]
+title = "可持久化线段树"
+files = ["persistent_sgt.md", "persistent_sgt.cpp", "persistent_sgt_usage.cpp"]
 
 [[entries]]
 title = "Li Chao Tree"
