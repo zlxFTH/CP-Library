@@ -37,7 +37,3 @@ files = [
   "historical_min_count.cpp",
   "historical_min_count_usage.cpp",
 ]
-
-[[entries]]
-title = "单侧递归线段树"
-files = ["one_side_sgt.md", "one_side_sgt.cpp"]
