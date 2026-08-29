@@ -5,8 +5,12 @@ title = "单点修改线段树"
 files = ["sgt.md", "sgt.cpp", "sgt_usage.cpp"]
 
 [[entries]]
-title = "LazySGT"
+title = "区间修改线段树"
 files = ["lazy_sgt.md", "lazy_sgt.cpp", "lazy_sgt_usage.cpp"]
+
+[[entries]]
+title = "线段树二分"
+files = ["sgt_bisect.md", "sgt_bisect.cpp"]
 
 [[entries]]
 title = "Chairman Tree"
