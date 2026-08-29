@@ -27,9 +27,9 @@ title = "李超树"
 files = ["li_chao.md", "li_chao.cpp"]
 
 [[entries]]
-title = "Segment Tree Beats"
-files = ["segment_tree_beats.md", "segment_tree_beats.cpp"]
+title = "线段树合并/分裂"
+files = ["segment_tree_merge_split.md", "segment_tree_merge_split.cpp"]
 
 [[entries]]
-title = "Segment Tree Merge / Split"
-files = ["segment_tree_merge_split.md", "segment_tree_merge_split.cpp"]
+title = "Segment Tree Beats"
+files = ["segment_tree_beats.md", "segment_tree_beats.cpp"]
