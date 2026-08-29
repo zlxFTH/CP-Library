@@ -14,7 +14,13 @@ files = ["sgt_bisect.md", "sgt_bisect.cpp"]
 
 [[entries]]
 title = "可持久化线段树"
-files = ["persistent_sgt.md", "persistent_sgt.cpp", "persistent_sgt_usage.cpp"]
+files = [
+  "persistent_sgt.md",
+  "persistent_sgt.cpp",
+  "persistent_sgt_usage.cpp",
+  "dynamic_sgt.md",
+  "dynamic_sgt.cpp",
+]
 
 [[entries]]
 title = "Li Chao Tree"
