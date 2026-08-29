@@ -39,5 +39,5 @@ files = [
 ]
 
 [[entries]]
-title = "楼房重建"
-files = ["building.md", "building.cpp", "building_usage.cpp"]
+title = "单侧递归线段树"
+files = ["one_side_sgt.md", "one_side_sgt.cpp"]
