@@ -4,6 +4,7 @@ struct SGT {
   struct V {
   };
   struct L {
+    bool operator==(L b) {}
   };
   int n;
   V t[N << 2];
@@ -14,6 +15,7 @@ struct SGT {
     t[p] = merge(t[ls], t[rs]);
   }
   void down(int p, int l, int r) {
+    if (lz[p] == L{}) return;
     int m = (l + r) / 2;
     apply(ls, l, m, lz[p]);
     apply(rs, m, r, lz[p]);
