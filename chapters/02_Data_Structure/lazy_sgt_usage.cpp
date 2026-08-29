@@ -1,4 +1,5 @@
 SGT seg;
+memset(&seg, 0, sizeof seg);
 seg.build(a);
 seg.mdf(l, r, x);
-V ans = seg.qry(l, r);
+auto ans = seg.qry(l, r);

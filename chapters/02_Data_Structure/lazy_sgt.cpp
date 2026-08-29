@@ -1,8 +1,8 @@
-struct V {
-};
 #define ls (p << 1)
 #define rs (p << 1 | 1)
 struct SGT {
+  struct V {
+  };
   int n;
   V t[N << 2];
   LL lz[N << 2];
@@ -19,7 +19,7 @@ struct SGT {
     lz[p] = 0;
   }
   void build(const vector<V>& a, int p = 1, int l = 0, int r = -1) {
-    if (r < 0) n = r = a.size();
+    if (r < 0) n = r = SZ(a);
     if (r - l == 1) {
       t[p] = a[l];
       return;
