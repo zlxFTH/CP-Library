@@ -1,4 +1,4 @@
-\noindent 以下均基于 3.2，只列出需要替换的 `V`、`merge`、`L` 和 `apply`。
+\noindent 以下均基于 3.2，只列出需要替换的 `V`、`merge`、`L`、`apply` 和 `mdf`。
 
 \noindent\textbf{历史版本和}
 
