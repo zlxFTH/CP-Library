@@ -1,3 +1,3 @@
 - 0-index，左闭右开 $[l,r)$。
-- 按题目补全 `merge` 和 `apply`。
-- 多组测试每组先 `memset(&seg,0,sizeof seg)`，再重新 `build`。
+- 按题目补全 `V`、`L`、`merge` 和 `apply`，其中 `L{}` 为空标记。
+- 多组测试每组先清空 `seg.lz`，再重新 `build`。

@@ -3,20 +3,21 @@
 struct SGT {
   struct V {
   };
+  struct L {
+  };
   int n;
   V t[N << 2];
-  LL lz[N << 2];
+  L lz[N << 2];
   V merge(V a, V b) {}
-  void apply(int p, int l, int r, LL x) {}
+  void apply(int p, int l, int r, L x) {}
   void up(int p) {
     t[p] = merge(t[ls], t[rs]);
   }
   void down(int p, int l, int r) {
-    if (!lz[p]) return;
     int m = (l + r) / 2;
     apply(ls, l, m, lz[p]);
     apply(rs, m, r, lz[p]);
-    lz[p] = 0;
+    lz[p] = {};
   }
   void build(const vector<V>& a, int p = 1, int l = 0, int r = -1) {
     if (r < 0) n = r = SZ(a);
@@ -29,7 +30,7 @@ struct SGT {
     build(a, rs, m, r);
     up(p);
   }
-  void mdf(int ql, int qr, LL x, int p = 1, int l = 0, int r = -1) {
+  void mdf(int ql, int qr, L x, int p = 1, int l = 0, int r = -1) {
     if (r < 0) r = n;
     if (ql <= l && r <= qr) return apply(p, l, r, x);
     down(p, l, r);
