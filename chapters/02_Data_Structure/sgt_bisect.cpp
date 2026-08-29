@@ -1,46 +1,20 @@
-#define ls (p << 1)
-#define rs (p << 1 | 1)
-template <class G>
-int max_right(int ql, G& g, V& x, int p, int l, int r) {
-  if (r <= ql) return r;
-  if (ql <= l) {
-    V y = merge(x, t[p]);
-    if (g(y)) {
-      x = y;
-      return r;
-    }
-    if (r - l == 1) return l;
-  }
+int fnd_left(int ql, int qr, int p = 1, int l = 0, int r = -1) {
+  if (r < 0) r = n;
+  if (r <= ql || qr < l) return -1;
+  if () return -1;
+  if (r - l == 1) return l;
   down(p, l, r);
   int m = (l + r) / 2;
-  int q = max_right(ql, g, x, ls, l, m);
-  if (q < m) return q;
-  return max_right(ql, g, x, rs, m, r);
+  int q = fnd_left(ql, qr, ls, l, m);
+  return q < 0 ? fnd_left(ql, qr, rs, m, r) : q;
 }
-template <class G> int max_right(int l, G g) {
-  V x{};
-  return max_right(l, g, x, 1, 0, n);
-}
-template <class G>
-int min_left(int qr, G& g, V& x, int p, int l, int r) {
-  if (qr <= l) return l;
-  if (r <= qr) {
-    V y = merge(t[p], x);
-    if (g(y)) {
-      x = y;
-      return l;
-    }
-    if (r - l == 1) return r;
-  }
+int fnd_right(int ql, int qr, int p = 1, int l = 0, int r = -1) {
+  if (r < 0) r = n;
+  if (r <= ql || qr < l) return -1;
+  if () return -1;
+  if (r - l == 1) return l;
   down(p, l, r);
   int m = (l + r) / 2;
-  int q = min_left(qr, g, x, rs, m, r);
-  if (q > m) return q;
-  return min_left(qr, g, x, ls, l, m);
+  int q = fnd_right(ql, qr, rs, m, r);
+  return q < 0 ? fnd_right(ql, qr, ls, l, m) : q;
 }
-template <class G> int min_left(int r, G g) {
-  V x{};
-  return min_left(r, g, x, 1, 0, n);
-}
-#undef ls
-#undef rs
