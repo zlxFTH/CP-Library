@@ -18,7 +18,7 @@ int max_right(int ql, G& g, LL& x, int p, int l, int r) {
   return max_right(ql, g, x, rs, m, r);
 }
 template <class G> int max_right(int l, G g) {
-  LL x = e();
+  LL x = 0;
   return max_right(l, g, x, 1, 0, n);
 }
 template <class G>
@@ -39,7 +39,7 @@ int min_left(int qr, G& g, LL& x, int p, int l, int r) {
   return min_left(qr, g, x, ls, l, m);
 }
 template <class G> int min_left(int r, G g) {
-  LL x = e();
+  LL x = 0;
   return min_left(r, g, x, 1, 0, n);
 }
 #undef ls
