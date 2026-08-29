@@ -22,5 +22,3 @@
 - 只有区间加/赋值等闭合懒标记时，$m$ 次操作仍为 $O(m\log n)$；与 `chmin/chmax` 结合时，需要对极值类和非极值类分别保存当前/历史标记，复杂度继承所用 Beats，常见组合为 $O(m\log ^2 n)$。
 
 复杂度必须用势能或标记回收证明；只有“看起来能剪枝”不足以保证均摊复杂度。
-
-参考：[OI Wiki：区间最值操作 & 区间历史最值](https://oi-wiki.org/ds/seg-beats/)，[trsins 学习笔记](https://www.cnblogs.com/trsins/p/17970751)，[SoyTony 学习笔记](https://www.cnblogs.com/SoyTony/p/Learning_Notes_about_Segment_Tree_Beats.html)。
