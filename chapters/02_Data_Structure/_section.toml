@@ -13,7 +13,7 @@ title = "线段树二分"
 files = ["sgt_bisect.md", "sgt_bisect.cpp"]
 
 [[entries]]
-title = "可持久化线段树"
+title = "可持久化线段树/动态开点"
 files = [
   "persistent_sgt.md",
   "persistent_sgt.cpp",
