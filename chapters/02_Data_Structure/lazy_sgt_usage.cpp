@@ -1,4 +1,4 @@
 SGT seg;
 seg.build(a);
 seg.mdf(l, r, x);
-LL ans = seg.qry(l, r);
+V ans = seg.qry(l, r);

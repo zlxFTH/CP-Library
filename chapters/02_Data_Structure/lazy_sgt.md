@@ -1,3 +1,3 @@
 - 0-index，左闭右开 $[l,r)$。
 - 按题目补全 `merge` 和 `apply`。
-- `SGT seg` 放在全局；多组测试每组先 `memset(&seg,0,sizeof seg)`，再重新 `build`。
+- 多组测试每组先 `memset(&seg,0,sizeof seg)`，再重新 `build`。

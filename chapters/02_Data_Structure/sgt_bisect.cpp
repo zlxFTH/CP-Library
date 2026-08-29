@@ -1,10 +1,10 @@
 #define ls (p << 1)
 #define rs (p << 1 | 1)
 template <class G>
-int max_right(int ql, G& g, LL& x, int p, int l, int r) {
+int max_right(int ql, G& g, V& x, int p, int l, int r) {
   if (r <= ql) return r;
   if (ql <= l) {
-    LL y = merge(x, t[p]);
+    V y = merge(x, t[p]);
     if (g(y)) {
       x = y;
       return r;
@@ -18,14 +18,14 @@ int max_right(int ql, G& g, LL& x, int p, int l, int r) {
   return max_right(ql, g, x, rs, m, r);
 }
 template <class G> int max_right(int l, G g) {
-  LL x = 0;
+  V x{};
   return max_right(l, g, x, 1, 0, n);
 }
 template <class G>
-int min_left(int qr, G& g, LL& x, int p, int l, int r) {
+int min_left(int qr, G& g, V& x, int p, int l, int r) {
   if (qr <= l) return l;
   if (r <= qr) {
-    LL y = merge(t[p], x);
+    V y = merge(t[p], x);
     if (g(y)) {
       x = y;
       return l;
@@ -39,7 +39,7 @@ int min_left(int qr, G& g, LL& x, int p, int l, int r) {
   return min_left(qr, g, x, ls, l, m);
 }
 template <class G> int min_left(int r, G g) {
-  LL x = 0;
+  V x{};
   return min_left(r, g, x, 1, 0, n);
 }
 #undef ls

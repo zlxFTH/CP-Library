@@ -1,9 +1,12 @@
+struct V {
+};
 #define ls (p << 1)
 #define rs (p << 1 | 1)
 struct SGT {
   int n;
-  LL t[N << 2], lz[N << 2];
-  LL merge(LL a, LL b) {}
+  V t[N << 2];
+  LL lz[N << 2];
+  V merge(V a, V b) {}
   void apply(int p, int l, int r, LL x) {}
   void up(int p) {
     t[p] = merge(t[ls], t[rs]);
@@ -15,7 +18,7 @@ struct SGT {
     apply(rs, m, r, lz[p]);
     lz[p] = 0;
   }
-  void build(const vector<LL>& a, int p = 1, int l = 0, int r = -1) {
+  void build(const vector<V>& a, int p = 1, int l = 0, int r = -1) {
     if (r < 0) n = r = a.size();
     if (r - l == 1) {
       t[p] = a[l];
@@ -35,7 +38,7 @@ struct SGT {
     if (m < qr) mdf(ql, qr, x, rs, m, r);
     up(p);
   }
-  LL qry(int ql, int qr, int p = 1, int l = 0, int r = -1) {
+  V qry(int ql, int qr, int p = 1, int l = 0, int r = -1) {
     if (r < 0) r = n;
     if (ql <= l && r <= qr) return t[p];
     down(p, l, r);
