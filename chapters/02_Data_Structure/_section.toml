@@ -37,3 +37,7 @@ files = [
   "historical_min_count.cpp",
   "historical_min_count_usage.cpp",
 ]
+
+[[entries]]
+title = "楼房重建"
+files = ["building.md", "building.cpp", "building_usage.cpp"]
