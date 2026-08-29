@@ -35,6 +35,16 @@ struct SGT {
     if (m < qr) rs(p) = add(ql, qr, v, rs(p), m, r);
     return p;
   }
+  int merge(int p, int q, int l = 0, int r = -1) {
+    if (r < 0) r = n;
+    if (!p || !q) return p | q;
+    p = add(t[q].v, p, l, r);
+    if (r - l == 1) return p;
+    int m = (l + r) / 2;
+    ls(p) = merge(ls(p), ls(q), l, m);
+    rs(p) = merge(rs(p), rs(q), m, r);
+    return p;
+  }
   LL qry(int x, int p, int l = 0, int r = -1) {
     if (r < 0) r = n;
     if (!p) return INF;
