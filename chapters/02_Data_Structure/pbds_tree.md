@@ -1,0 +1,2 @@
+- `tr.order_of_key(x)` 返回严格小于 `x` 的元素个数。
+- `tr.find_by_order(k)` 返回 0-index 第 `k` 小元素的迭代器；若 `k >= tr.size()`，返回 `tr.end()`。

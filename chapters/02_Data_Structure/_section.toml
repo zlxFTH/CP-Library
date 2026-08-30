@@ -40,7 +40,7 @@ files = ["fhq_treap.cpp"]
 
 [[entries]]
 title = "pbds tree"
-files = ["pbds_tree.cpp"]
+files = ["pbds_tree.md", "pbds_tree.cpp"]
 
 [[entries]]
 title = "莫队"
