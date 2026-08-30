@@ -41,3 +41,7 @@ files = ["fhq_treap.cpp"]
 [[entries]]
 title = "pbds tree"
 files = ["pbds_tree.cpp"]
+
+[[entries]]
+title = "莫队"
+files = ["mo.md", "mo.cpp", "mo_usage.cpp"]
