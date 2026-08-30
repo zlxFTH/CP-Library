@@ -33,3 +33,11 @@ files = ["segment_tree_merge_split.md", "segment_tree_merge_split.cpp"]
 [[entries]]
 title = "ODT"
 files = ["odt.cpp"]
+
+[[entries]]
+title = "FHQ Treap"
+files = ["fhq_treap.cpp"]
+
+[[entries]]
+title = "pbds tree"
+files = ["pbds_tree.cpp"]
