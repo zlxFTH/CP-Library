@@ -27,9 +27,9 @@ title = "李超树"
 files = ["li_chao.md", "li_chao.cpp"]
 
 [[entries]]
-title = "ODT/颜色段均摊"
-files = ["odt.cpp"]
-
-[[entries]]
 title = "线段树合并/分裂"
 files = ["segment_tree_merge_split.md", "segment_tree_merge_split.cpp"]
+
+[[entries]]
+title = "ODT/颜色段均摊"
+files = ["odt.cpp"]
