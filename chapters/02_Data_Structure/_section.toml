@@ -29,11 +29,3 @@ files = ["li_chao.md", "li_chao.cpp"]
 [[entries]]
 title = "线段树合并/分裂"
 files = ["segment_tree_merge_split.md", "segment_tree_merge_split.cpp"]
-
-[[entries]]
-title = "历史操作"
-files = [
-  "historical.md",
-  "historical_min_count.cpp",
-  "historical_min_count_usage.cpp",
-]
