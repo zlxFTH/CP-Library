@@ -32,7 +32,7 @@ files = ["segment_tree_merge_split.md", "segment_tree_merge_split.cpp"]
 
 [[entries]]
 title = "ODT"
-files = ["odt.cpp"]
+files = ["odt.cpp", "odt_usage.cpp"]
 
 [[entries]]
 title = "FHQ Treap"
