@@ -31,5 +31,5 @@ title = "线段树合并/分裂"
 files = ["segment_tree_merge_split.md", "segment_tree_merge_split.cpp"]
 
 [[entries]]
-title = "ODT/颜色段均摊"
+title = "ODT"
 files = ["odt.cpp"]
