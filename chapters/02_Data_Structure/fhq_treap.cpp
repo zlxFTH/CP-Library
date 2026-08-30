@@ -5,13 +5,12 @@ struct FHQTreap {
   };
   struct Node {
     int ch[2]{}, sz = 0;
-    unsigned pri = 0;
+    ULL pri = 0;
     V v;
     bool rev = false;
   };
   vector<Node> t = {{}};
   int rt = 0;
-  mt19937 rng{random_device{}()};
   int size(int p) { return t[p].sz; }
   int size() { return size(rt); }
   void up(int p) {
@@ -26,7 +25,7 @@ struct FHQTreap {
     t[p].rev = false;
   }
   int node(V v) {
-    t.push_back({{}, 1, uint32_t(rng()), v});
+    t.push_back({{}, 1, rnd(), v});
     return SZ(t) - 1;
   }
   void split(int p, int k, int& x, int& y) {
