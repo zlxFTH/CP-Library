@@ -1,0 +1,2 @@
+- `auto it = h.push(x)` 返回元素句柄；`h.modify(it, y)` 修改该元素，`h.erase(it)` 删除该元素。
+- `h.join(g)` 将 `g` 破坏性合并到 `h`，之后 `g` 为空。
