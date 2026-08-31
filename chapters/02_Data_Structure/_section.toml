@@ -36,7 +36,7 @@ files = ["odt.cpp", "odt_usage.cpp"]
 
 [[entries]]
 title = "FHQ Treap"
-files = ["fhq_treap.cpp"]
+files = ["fhq_treap.cpp", "fhq_treap_usage.cpp"]
 
 [[entries]]
 title = "pbds tree"

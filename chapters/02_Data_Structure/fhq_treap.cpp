@@ -44,15 +44,32 @@ struct FHQTreap {
     down(q), ls(q) = merge(p, ls(q)), up(q);
     return q;
   }
+  int insert(int p, int k, int q) {
+    if (!p) return q;
+    if (t[q].pri < t[p].pri) {
+      split(p, k, ls(q), rs(q)), up(q);
+      return q;
+    }
+    down(p);
+    if (k <= size(ls(p))) ls(p) = insert(ls(p), k, q);
+    else rs(p) = insert(rs(p), k - size(ls(p)) - 1, q);
+    up(p);
+    return p;
+  }
   void insert(int k, V v) {
-    int x, y;
-    split(rt, k, x, y);
-    rt = merge(merge(x, node(v)), y);
+    rt = insert(rt, k, node(v));
+  }
+  int erase(int p, int k) {
+    down(p);
+    int s = size(ls(p));
+    if (k == s) return merge(ls(p), rs(p));
+    if (k < s) ls(p) = erase(ls(p), k);
+    else rs(p) = erase(rs(p), k - s - 1);
+    up(p);
+    return p;
   }
   void erase(int k) {
-    int x, y, z;
-    split(rt, k, x, y), split(y, 1, y, z);
-    rt = merge(x, z);
+    rt = erase(rt, k);
   }
   void reverse(int l, int r) {
     int x, y, z;
@@ -65,9 +82,6 @@ struct FHQTreap {
     if (k == s) return p;
     if (k < s) return kth(ls(p), k);
     return kth(rs(p), k - s - 1);
-  }
-  V& operator[](int k) {
-    return t[kth(rt, k)].v;
   }
   void clear() {
     t.assign(1, {}), rt = 0;
