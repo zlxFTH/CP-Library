@@ -60,4 +60,4 @@ files = ["mo_rollback.md", "mo_rollback.cpp"]
 
 [[entries]]
 title = "莫队二次离线"
-files = ["mo_secondary_offline.md", "mo_secondary_offline.cpp"]
+files = ["mo_secondary_offline.md"]
