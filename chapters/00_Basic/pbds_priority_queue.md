@@ -1,2 +1,3 @@
+- 当前写法为大根堆，`top()` 返回 `x` 最大的元素；改为 `return x > b.x;` 即为小根堆。
 - `auto it = h.push(x)` 返回元素句柄；`h.modify(it, y)` 修改该元素，`h.erase(it)` 删除该元素。
 - `h.join(g)` 将 `g` 破坏性合并到 `h`，之后 `g` 为空。

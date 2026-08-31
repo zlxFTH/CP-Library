@@ -21,9 +21,5 @@ title = "随机数"
 files = ["random.cpp"]
 
 [[entries]]
-title = "Matrix"
-files = ["matrix.cpp"]
-
-[[entries]]
 title = "PBDS Priority Queue"
 files = ["pbds_priority_queue.md", "pbds_priority_queue.cpp"]
