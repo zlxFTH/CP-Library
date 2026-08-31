@@ -1,6 +1,10 @@
 title = "Data Structure"
 
 [[entries]]
+title = "可撤销并查集"
+files = ["rollback_dsu.md", "rollback_dsu.cpp"]
+
+[[entries]]
 title = "单点修改线段树"
 files = ["sgt.md", "sgt.cpp", "sgt_usage.cpp"]
 
@@ -43,5 +47,17 @@ title = "pbds tree"
 files = ["pbds_tree.md", "pbds_tree.cpp"]
 
 [[entries]]
-title = "莫队"
-files = ["mo.md", "mo.cpp", "mo_usage.cpp"]
+title = "普通莫队"
+files = ["mo.md", "mo.cpp"]
+
+[[entries]]
+title = "带修莫队"
+files = ["mo_modify.md", "mo_modify.cpp"]
+
+[[entries]]
+title = "回滚莫队"
+files = ["mo_rollback.md", "mo_rollback.cpp"]
+
+[[entries]]
+title = "莫队二次离线"
+files = ["mo_secondary_offline.md", "mo_secondary_offline.cpp"]
