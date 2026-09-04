@@ -29,9 +29,9 @@ title = "二次剩余"
 files = ["tonelli_shanks.md", "tonelli_shanks.cpp"]
 
 [[entries]]
-title = "类欧"
+title = "类欧几里得"
 files = ["floor_sum.md", "floor_sum.cpp"]
 
 [[entries]]
-title = "万欧"
+title = "万能欧几里得"
 files = ["universal_euclid.md", "universal_euclid.cpp"]
