@@ -51,3 +51,11 @@ files = ["exlucas.md", "exlucas.cpp"]
 [[entries]]
 title = "容斥反演"
 files = ["inclusion_exclusion.md"]
+
+[[entries]]
+title = "拉格朗日插值"
+files = ["lagrange.md", "lagrange.cpp"]
+
+[[entries]]
+title = "多项式全家桶"
+files = ["poly.md", "poly.cpp"]
