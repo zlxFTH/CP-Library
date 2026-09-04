@@ -11,3 +11,11 @@ files = ["polar_sort.md", "polar_sort.cpp", "polar_sort_usage.cpp"]
 [[entries]]
 title = "seg_poly"
 files = ["seg_poly.cpp"]
+
+[[entries]]
+title = "半平面交"
+files = ["half_plane.md", "half_plane.cpp"]
+
+[[entries]]
+title = "闵可夫斯基和"
+files = ["minkowski.md", "minkowski.cpp"]
