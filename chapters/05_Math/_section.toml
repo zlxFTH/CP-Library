@@ -1,0 +1,37 @@
+title = "Math"
+
+[[entries]]
+title = "ExGCD"
+files = ["exgcd.md", "exgcd.cpp"]
+
+[[entries]]
+title = "BSGS / ExBSGS"
+files = ["exbsgs.md", "exbsgs.cpp"]
+
+[[entries]]
+title = "线性筛"
+files = ["sieve.md", "sieve.cpp"]
+
+[[entries]]
+title = "Miller-Rabin / Pollard-Rho"
+files = ["factor.md", "factor.cpp"]
+
+[[entries]]
+title = "Primitive Root"
+files = ["primitive_root.md", "primitive_root.cpp"]
+
+[[entries]]
+title = "exCRT"
+files = ["crt.md", "crt.cpp"]
+
+[[entries]]
+title = "二次剩余"
+files = ["tonelli_shanks.md", "tonelli_shanks.cpp"]
+
+[[entries]]
+title = "类欧"
+files = ["floor_sum.md", "floor_sum.cpp"]
+
+[[entries]]
+title = "万欧"
+files = ["universal_euclid.md", "universal_euclid.cpp"]

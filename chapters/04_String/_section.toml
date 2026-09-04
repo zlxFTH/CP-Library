@@ -1,0 +1,33 @@
+title = "String"
+
+[[entries]]
+title = "String Hash"
+files = ["string_hash.cpp"]
+
+[[entries]]
+title = "KMP"
+files = ["kmp.cpp"]
+
+[[entries]]
+title = "Z 函数"
+files = ["z_function.cpp"]
+
+[[entries]]
+title = "AC 自动机"
+files = ["aho_corasick.cpp"]
+
+[[entries]]
+title = "SA"
+files = ["suffix_array.md", "suffix_array.cpp"]
+
+[[entries]]
+title = "SAM"
+files = ["suffix_automaton.md", "suffix_automaton.cpp"]
+
+[[entries]]
+title = "Manacher"
+files = ["manacher.md", "manacher.cpp"]
+
+[[entries]]
+title = "PAM"
+files = ["palindromic_tree.md", "palindromic_tree.cpp"]

@@ -1,0 +1,13 @@
+title = "Geometry"
+
+[[entries]]
+title = "vector"
+files = ["vector.md", "vector.cpp"]
+
+[[entries]]
+title = "极角排序"
+files = ["polar_sort.md", "polar_sort.cpp", "polar_sort_usage.cpp"]
+
+[[entries]]
+title = "seg_poly"
+files = ["seg_poly.cpp"]

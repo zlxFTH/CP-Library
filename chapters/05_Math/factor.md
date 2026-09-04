@@ -1,0 +1,3 @@
+- 依赖前面的 `qp(a,b,m)` 与 Basic 中的 `rnd`；`prime(n)` 对正 `LL` 确定性判素。
+- 复杂度（定长整数）：Miller--Rabin 为 $O(k\log n)$（这里 $k=7$）；Pollard--Rho 找因子的期望为 $O(\sqrt p)\le O(n^{1/4})$，空间 $O(1)$，其中 $p$ 为最小质因子。
+- `factor(n)` 返回带重数且升序排列的质因子，`factor(1)` 返回空数组。

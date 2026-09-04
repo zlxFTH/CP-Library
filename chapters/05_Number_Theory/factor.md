@@ -1,2 +1,0 @@
-- `prime(n)` 对整个 `ULL` 范围使用确定性 Miller--Rabin；`factor(n)` 返回带重数且升序排列的质因子。
-- 乘法使用 `__uint128_t`，要求编译器支持 GNU C++；`factor(1)` 返回空数组。

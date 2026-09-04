@@ -1,0 +1,17 @@
+title = "Tree"
+
+[[entries]]
+title = "LCA"
+files = ["dfs_lca.cpp"]
+
+[[entries]]
+title = "点分治"
+files = ["centroid.cpp"]
+
+[[entries]]
+title = "虚树"
+files = ["virtual_tree.cpp"]
+
+[[entries]]
+title = "树 Hash"
+files = ["tree_hash.cpp"]

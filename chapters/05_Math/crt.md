@@ -1,0 +1,2 @@
+- `excrt(r,m)` 依赖 `linear_congruence`，合并任意个方程 $x\equiv r_i\pmod {m_i}$，模数不要求互质，但必须为正数。
+- 返回 `{r,m}` 表示全部解为 $x\equiv r\pmod m$；无解返回 `{0,0}`。要求最终模数最小公倍数不超过 `LL`。

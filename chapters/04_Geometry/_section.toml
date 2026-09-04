@@ -1,9 +1,0 @@
-title = "Geometry"
-
-[[entries]]
-title = "vector"
-files = ["vector.cpp"]
-
-[[entries]]
-title = "seg_poly"
-files = ["seg_poly.cpp"]

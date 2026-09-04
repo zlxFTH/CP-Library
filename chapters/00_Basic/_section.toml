@@ -9,16 +9,20 @@ title = "pai"
 files = ["pai.sh"]
 
 [[entries]]
-title = "run"
-files = ["run.sh"]
-
-[[entries]]
 title = "缺省源"
 files = ["src.cpp"]
 
 [[entries]]
 title = "随机数"
 files = ["random.cpp"]
+
+[[entries]]
+title = "Mod"
+files = ["mod.cpp"]
+
+[[entries]]
+title = "Comb"
+files = ["comb.cpp"]
 
 [[entries]]
 title = "PBDS Priority Queue"

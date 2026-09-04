@@ -1,12 +1,52 @@
 title = "Graph"
 
 [[entries]]
-title = "Dijkstra"
-files = ["dijkstra.cpp"]
+title = "差分约束"
+files = ["difference_constraints.md", "difference_constraints.cpp"]
+
+[[entries]]
+title = "欧拉回路"
+files = ["euler_directed.cpp", "euler_undirected.cpp"]
 
 [[entries]]
 title = "Tarjan SCC"
 files = ["tarjan.cpp"]
+
+[[entries]]
+title = "Tarjan EBCC"
+files = ["tarjan_ebcc.cpp"]
+
+[[entries]]
+title = "Tarjan VBCC"
+files = ["tarjan_vbcc.cpp"]
+
+[[entries]]
+title = "最大流 Dinic"
+files = ["dinic.cpp"]
+
+[[entries]]
+title = "费用流 EK"
+files = ["mcmf.cpp"]
+
+[[entries]]
+title = "上下界网络流"
+files = ["lower_bound_flow.md"]
+
+[[entries]]
+title = "三四元环"
+files = ["cycles34.cpp"]
+
+[[entries]]
+title = "支配树"
+files = ["dominator_tree.md", "dominator_tree.cpp"]
+
+[[entries]]
+title = "二分图最大匹配"
+files = ["bipartite_matching.md", "bipartite_matching.cpp"]
+
+[[entries]]
+title = "KM"
+files = ["km.cpp"]
 
 [[entries]]
 title = "2-SAT"

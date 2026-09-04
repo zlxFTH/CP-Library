@@ -1,0 +1,14 @@
+title = "Misc"
+
+[[entries]]
+title = "模拟退火"
+files = ["annealing.cpp"]
+
+[[entries]]
+title = "爬山法"
+files = ["hill_climbing.cpp"]
+
+[[entries]]
+title = "常数表"
+files = ["constants.md"]
+wide = true

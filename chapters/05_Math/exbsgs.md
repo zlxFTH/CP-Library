@@ -1,0 +1,2 @@
+- 求最小的 $x\ge 0$ 使 $a^x\equiv b\pmod m$；`bsgs` 要求 $\gcd(a,m)=1$，`exbsgs` 无此限制，无解返回 `-1`。
+- 时间与空间复杂度均为 $O(\sqrt m)$，使用哈希表保存 baby steps。
