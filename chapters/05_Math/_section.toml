@@ -33,7 +33,7 @@ title = "floor sum"
 files = ["floor_sum.md", "floor_sum.cpp"]
 
 [[entries]]
-title = "万能欧几里得"
+title = "万欧"
 files = ["universal_euclid.md", "universal_euclid.cpp"]
 
 [[entries]]
