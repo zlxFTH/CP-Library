@@ -51,3 +51,15 @@ $$
 \min_{i\in S}x_i=
 \sum_{\varnothing\ne T\subseteq S}(-1)^{|T|-1}\max_{i\in T}x_i.
 $$
+
+第 $k$ 大与第 $k$ 小的推广式为
+
+$$
+x_{(k)\downarrow}=
+\sum_{\substack{T\subseteq S\\|T|\ge k}}
+(-1)^{|T|-k}\binom{|T|-1}{k-1}\min_{i\in T}x_i,
+\qquad
+x_{(k)\uparrow}=
+\sum_{\substack{T\subseteq S\\|T|\ge k}}
+(-1)^{|T|-k}\binom{|T|-1}{k-1}\max_{i\in T}x_i.
+$$
