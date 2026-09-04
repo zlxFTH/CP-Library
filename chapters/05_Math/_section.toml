@@ -59,3 +59,11 @@ files = ["lagrange.md", "lagrange.cpp"]
 [[entries]]
 title = "多项式全家桶"
 files = ["poly.md", "poly.cpp"]
+
+[[entries]]
+title = "行列式"
+files = ["det.md", "det.cpp"]
+
+[[entries]]
+title = "线性基"
+files = ["linear_basis.md", "linear_basis.cpp"]

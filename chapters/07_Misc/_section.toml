@@ -9,6 +9,10 @@ title = "爬山法"
 files = ["hill_climbing.cpp"]
 
 [[entries]]
+title = "高精度"
+files = ["bigint.md", "bigint.cpp"]
+
+[[entries]]
 title = "常数表"
 files = ["constants.md"]
 wide = true
