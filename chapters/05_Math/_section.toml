@@ -35,3 +35,11 @@ files = ["floor_sum.md", "floor_sum.cpp"]
 [[entries]]
 title = "万能欧几里得"
 files = ["universal_euclid.md", "universal_euclid.cpp"]
+
+[[entries]]
+title = "杜教筛"
+files = ["du_sieve.md", "du_sieve.cpp"]
+
+[[entries]]
+title = "Min_25 筛"
+files = ["min25.md", "min25.cpp"]
