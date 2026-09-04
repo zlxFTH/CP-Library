@@ -43,3 +43,7 @@ files = ["du_sieve.md", "du_sieve.cpp"]
 [[entries]]
 title = "Min_25 筛"
 files = ["min25.md", "min25.cpp"]
+
+[[entries]]
+title = "ExLucas"
+files = ["exlucas.md", "exlucas.cpp"]
