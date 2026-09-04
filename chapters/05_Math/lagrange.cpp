@@ -14,6 +14,20 @@ LL lag(vector<LL> y, LL x) {
   }
   return ans;
 }
+LL lag(vector<LL> x, vector<LL> y, LL t) {
+  int n = SZ(x); t %= P; if (t < 0) t += P;
+  LL ans = 0;
+  for (int i = 0; i < n; i++) {
+    LL a = y[i], b = 1;
+    for (int j = 0; j < n; j++) if (i != j) {
+      LL u = t >= x[j] ? t - x[j] : t - x[j] + P;
+      LL v = x[i] >= x[j] ? x[i] - x[j] : x[i] - x[j] + P;
+      a = Mul(a, u), b = Mul(b, v);
+    }
+    ans = Add(ans, Mul(a, qp(b)));
+  }
+  return ans;
+}
 vector<LL> coef(vector<LL> x, vector<LL> y) {
   int n = SZ(x); if (!n) return {};
   vector<LL> q(n + 1), b(n), a(n); q[0] = 1;

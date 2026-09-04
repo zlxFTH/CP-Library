@@ -1,4 +1,6 @@
-`lag(y,x)` 要求 $y_i=f(i)$（0-index）且 $\deg f<|y|<P$，返回 $f(x)$。调用前先 `initComb(SZ(y))`，单次 $O(n)$。
+输入的横、纵坐标均已归一到 $[0,P)$。`lag(y,t)` 要求 $y_i=f(i)$（0-index）且 $\deg f<|y|<P$，返回 $f(t)$。调用前先 `initComb(SZ(y))`，单次 $O(n)$。
+
+`lag(x,y,t)` 要求横坐标两两不同，返回经过 $(x_i,y_i)$ 的 $n-1$ 次多项式在 $t$ 处的值，复杂度 $O(n^2)$。
 
 `coef(x,y)` 要求横坐标两两不同，返回系数 $[a_0,\ldots,a_{n-1}]$，其中
 $f(t)=\sum_{i=0}^{n-1}a_it^i$。复杂度 $O(n^2)$。
