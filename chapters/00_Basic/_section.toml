@@ -27,3 +27,7 @@ files = ["comb.cpp"]
 [[entries]]
 title = "PBDS Priority Queue"
 files = ["pbds_priority_queue.md", "pbds_priority_queue.cpp"]
+
+[[entries]]
+title = "Heap"
+files = ["heap.cpp"]

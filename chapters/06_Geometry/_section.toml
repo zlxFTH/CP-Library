@@ -2,11 +2,11 @@ title = "Geometry"
 
 [[entries]]
 title = "vector"
-files = ["vector.md", "vector.cpp"]
+files = ["vector.cpp"]
 
 [[entries]]
 title = "极角排序"
-files = ["polar_sort.md", "polar_sort.cpp", "polar_sort_usage.cpp"]
+files = ["polar_sort.cpp", "polar_sort_usage.cpp"]
 
 [[entries]]
 title = "seg_poly"
@@ -14,8 +14,16 @@ files = ["seg_poly.cpp"]
 
 [[entries]]
 title = "半平面交"
-files = ["half_plane.md", "half_plane.cpp"]
+files = ["half_plane.cpp"]
+
+[[entries]]
+title = "凸包"
+files = ["convex_hull.cpp"]
 
 [[entries]]
 title = "闵可夫斯基和"
-files = ["minkowski.md", "minkowski.cpp"]
+files = ["minkowski.cpp"]
+
+[[entries]]
+title = "点线多边形与圆"
+files = ["point_poly.cpp", "circle.cpp"]

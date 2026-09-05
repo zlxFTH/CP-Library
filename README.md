@@ -16,7 +16,7 @@ cd Library
 ```bash
 ./build.sh --check       # 检查工具、配置和源文件
 ./build.sh --tex-only    # 只生成 TeX，不编译 PDF
-./build.sh --clean       # 清理旧产物后重新构建
+./build.sh --clean       # 清理构建产物并重建；保留 dist/ 中的其他文件
 ./install-packages.sh    # 按 tex-packages.txt 补齐 TinyTeX 宏包
 ```
 

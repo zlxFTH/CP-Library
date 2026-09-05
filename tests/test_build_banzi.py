@@ -113,5 +113,33 @@ class ManifestRenderingTests(unittest.TestCase):
             build_banzi.render_source_tree(self.settings, build_banzi.Stats())
 
 
+class CleanOutputsTests(unittest.TestCase):
+    def test_clean_removes_build_outputs_and_only_the_generated_dist_pdf(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            build_dir = root / "build"
+            dist_dir = root / "dist"
+            build_dir.mkdir()
+            dist_dir.mkdir()
+            (build_dir / ".gitkeep").write_text("\n", encoding="utf-8")
+            (build_dir / "Library.aux").write_text("temporary", encoding="utf-8")
+            (build_dir / "nested").mkdir()
+            (build_dir / "nested" / "temporary.log").write_text("temporary", encoding="utf-8")
+            (dist_dir / "Library.pdf").write_bytes(b"generated")
+            (dist_dir / "NOI notes.pdf").write_bytes(b"archive")
+            (dist_dir / "reference.txt").write_text("keep", encoding="utf-8")
+
+            with (
+                patch.object(build_banzi, "BUILD_DIR", build_dir),
+                patch.object(build_banzi, "DIST_DIR", dist_dir),
+            ):
+                build_banzi.clean_outputs("Library")
+
+            self.assertEqual(sorted(path.name for path in build_dir.iterdir()), [".gitkeep"])
+            self.assertFalse((dist_dir / "Library.pdf").exists())
+            self.assertEqual((dist_dir / "NOI notes.pdf").read_bytes(), b"archive")
+            self.assertEqual((dist_dir / "reference.txt").read_text(encoding="utf-8"), "keep")
+
+
 if __name__ == "__main__":
     unittest.main()

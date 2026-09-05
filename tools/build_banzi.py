@@ -452,16 +452,23 @@ def write_if_changed(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8")
 
 
-def clean_outputs() -> None:
-    for directory in (BUILD_DIR, DIST_DIR):
-        directory.mkdir(parents=True, exist_ok=True)
-        for child in directory.iterdir():
-            if child.name == ".gitkeep":
-                continue
-            if child.is_dir() and not child.is_symlink():
-                shutil.rmtree(child)
-            else:
-                child.unlink()
+def remove_path(path: Path) -> None:
+    if path.is_dir() and not path.is_symlink():
+        shutil.rmtree(path)
+    else:
+        path.unlink()
+
+
+def clean_outputs(output_name: str) -> None:
+    BUILD_DIR.mkdir(parents=True, exist_ok=True)
+    for child in BUILD_DIR.iterdir():
+        if child.name != ".gitkeep":
+            remove_path(child)
+
+    DIST_DIR.mkdir(parents=True, exist_ok=True)
+    generated_pdf = DIST_DIR / f"{output_name}.pdf"
+    if generated_pdf.exists() or generated_pdf.is_symlink():
+        remove_path(generated_pdf)
 
 
 def command_path(name: str) -> str:
@@ -519,7 +526,11 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="从 Markdown 与代码片段生成 LaTeX 模板书")
     parser.add_argument("--check", action="store_true", help="只检查配置、依赖和内容，不写文件")
     parser.add_argument("--tex-only", action="store_true", help="只生成 TeX，不编译 PDF")
-    parser.add_argument("--clean", action="store_true", help="构建前清理 build/ 与 dist/ 中的旧产物")
+    parser.add_argument(
+        "--clean",
+        action="store_true",
+        help="构建前清理 build/ 与 dist/ 中当前配置生成的 PDF，保留 dist/ 中的其他文件",
+    )
     return parser.parse_args()
 
 
@@ -543,7 +554,7 @@ def main() -> int:
         return 0
 
     if args.clean:
-        clean_outputs()
+        clean_outputs(settings.output_name)
     BUILD_DIR.mkdir(parents=True, exist_ok=True)
     DIST_DIR.mkdir(parents=True, exist_ok=True)
 

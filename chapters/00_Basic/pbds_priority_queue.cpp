@@ -6,4 +6,4 @@ struct V {
     return x < b.x;
   }
 };
-using Heap = __gnu_pbds::priority_queue<V, std::less<V>, pairing_heap_tag>;
+using PQ = __gnu_pbds::priority_queue<V, std::less<V>, pairing_heap_tag>;
